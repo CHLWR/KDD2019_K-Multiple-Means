@@ -21,7 +21,7 @@ function [laKMM, laMM, BiGraph, A, OBJ, Ah, laKMMh] = KMM(X, c, m, k)
 % 		svd2uv.m
 % 		struG2la.m
 %       eig1.m
-%       gen_nn_distanceA
+%       gen_nn_distanceA.m
 % Usage:
 %       % X: d*n
 %       [laKMM, laMM, AnchorGraph, Anchors, ~, ~, ~]= KMM(X', c, m,k) ;
