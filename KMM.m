@@ -29,7 +29,7 @@ function [laKMM, laMM, BiGraph, A, OBJ, Ah, laKMMh] = KMM(X, c, m, k)
 %
 %	Feiping Nie, Cheng-Long Wang, Xuelong Li, "K-Multiple-Means: A Multiple-Means 
 %   Clustering Method with Specified K Clusters," In The 25th ACM SIGKDD Conference
-%   on Knowledge Discovery and Data Mining (KDD ¡¯19), August 4¨C8, 2019, Anchorage, AK, USA.
+%   on Knowledge Discovery and Data Mining (KDD'19), August 4-8, 2019, Anchorage, AK, USA.
 %
 %   version 1.0 --May./2019 
 %
