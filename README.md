@@ -1,5 +1,5 @@
 # KDD2019_K-Multiple-Means (KMM)
-This repository contains a reference implementation of our K-Multiple-Means (KMM) proposed in KDD 2019.
+This repository contains a reference implementation for the paper "K-Multiple-Means: A Multiple-Means Clustering Method with Specified K Clusters,", which has been accepted by KDD'2019 as an ORAL paper.
 
 version 1.0 --May./2019 
 
