@@ -13,6 +13,11 @@ with the constrained Laplacian rank. We also show the theoretical analysis of th
 clustering. Meanwhile, KMM is linear scaled with respect to n. Experimental results on several synthetic and well-known realworld
 data sets are conducted to show the effectiveness of the proposed algorithm.
 
+## Short demo
+Run 'test_KMM_toy.m' in MATLAB. A example of updating process of multiple-means is as follows:
+
+<img src="https://github.com/CHLWR/KDD2019_K-Multiple-Means/blob/master/demo4.gif" align="center" width="400" height="400" />
+
 ## Short Promotion Video
 which will be released soon.
 
