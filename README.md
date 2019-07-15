@@ -19,7 +19,8 @@ Run 'test_KMM_toy.m' in MATLAB. A example of updating process of multiple-means 
 <img src="https://github.com/CHLWR/KDD2019_K-Multiple-Means/blob/master/demo4.gif" align="center" width="400" height="400" />
 
 ## Short Promotion Video
-which will be released soon.
+
+[![IMAGE ALT TEXT](http://img.youtube.com/vi/HswEYH2td8w/0.jpg)](https://www.youtube.com/embed/HswEYH2td8w "K-Multiple-Means")
 
 ## Oral Presentation Video
 which will be released soon.
