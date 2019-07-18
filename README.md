@@ -27,7 +27,7 @@ https://youtu.be/HswEYH2td8w
 which will be released soon.
 
 ## Others
-KMM can not only obtain the clustering result but also obtain the corresponding multi-mean value, which can be applied to many fields like kmeans, such as nearest-neighbor search, data compression, etc. KMM can also be used as an anchor-based spectral clustering method, which can find better anchors and achieve better clustering result. 
+KMM can not only obtain the clustering result but also obtain the prototypes corresponding to each sub-cluster, which can be applied to many fields such as vector quantization, cluster analysis, feature learning, nearest-neighbor search, data compression, etc. KMM can also be used as an anchor-based spectral clustering method, which can find better anchors and achieve better clustering result.
 
 If you find this code useful in your research, please cite the paper.
 
