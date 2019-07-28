@@ -2,6 +2,8 @@
 
 Implementation for the paper "K-Multiple-Means: A Multiple-Means Clustering Method with Specified K Clusters", which has been accepted by KDD'2019 as an Oral Paper, in the Research Track.
 
+Paper: https://dl.acm.org/citation.cfm?id=3330846
+
 ## Abstract
 In this paper, we make an extension of K-means for the clustering of multiple means. The popular K-means clustering uses only one center to model each class of data. However, the assumption on the shape of the clusters prohibits it to capture the non-convex
 patterns. Moreover, many categories consist of multiple subclasses which obviously cannot be represented by a single prototype. We
