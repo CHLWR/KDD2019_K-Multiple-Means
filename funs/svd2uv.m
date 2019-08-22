@@ -1,7 +1,12 @@
 
 function [Z, U, V, evc, D1z, D2z] = svd2uv(Z, c)
     [n,m] = size(Z);
-    Z = Z./sum(Z,2);
+    ver=version;
+    if(str2double(ver(1:3))>=9.1)
+        Z = Z./sum(Z,2);% for the newest version(>=9.1) of MATLAB
+    else
+        Z = bsxfun(@rdivide, Z, sum(Z,2));% for old version(<9.1) of MATLAB
+    end
     z1 = sum(Z,2);
     D1z = spdiags(1./sqrt(z1),0,n,n);  
     z2 = sum(Z,1);
