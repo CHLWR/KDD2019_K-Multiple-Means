@@ -57,7 +57,12 @@ clear distXt temp
 id(:,end) = [];
 
 Alpha = 0.5*(k*di(:,k+1)-sum(di(:,1:k),2)); 
-tmp = (di(:,k+1)-di(:,1:k))./(2*Alpha+eps);
+ver=version;
+if(str2double(ver(1:3))>=9.1)
+    tmp = (di(:,k+1)-di(:,1:k))./(2*Alpha+eps); % for the newest version(>=9.1) of MATLAB
+else
+    tmp =  bsxfun(@rdivide,bsxfun(@minus,di(:,k+1),di(:,1:k)),2*Alpha+eps); % for old version(<9.1) of MATLAB
+end
 Z = sparse(repmat([1:n],1,k),id(:),tmp(:),n,m);
 if ~isSparse
     Z=full(Z);
