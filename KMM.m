@@ -54,7 +54,9 @@ method=1;
 % StartIndZ: before MM update
 % EndIndZ: after MM update
 if method ==0
-    StartIndZ=randsrc(n,1,1:m);
+    idx=randsrc(m,1,1:n);
+    Dis=sqdist(X,X(:,idx));
+    [~, StartIndZ] = min(Dis, [], 2);
 else
     StartIndZ=kmeans(X',m);
 end
