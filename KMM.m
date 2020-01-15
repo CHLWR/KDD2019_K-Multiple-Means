@@ -22,7 +22,6 @@ function [laKMM, laMM, BiGraph, A, OBJ, Ah, laKMMh] = KMM_mmconv(X, c, m, k)
 % 		svd2uv.m
 % 		struG2la.m
 %       eig1.m
-%       gen_nn_distanceA.m
 % Usage:
 %       % X: d*n
 %       [laKMM, laMM, AnchorGraph, Anchors, ~, ~, ~]= KMM(X', c, m,k) ;
@@ -48,7 +47,7 @@ Iter=15;
 OBJ=[];
 n=size(X,2);
 method=1; % method for initial seeds, 1:kmeans; 0:random 
-opt_conv=1; % option for convergence, 1:sub prototypes; 0:partiton of subclusters 
+opt_conv=1; % option for convergence, 1:sub prototypes; 0:partiton of subclusters
 % StartIndZ: before MM update
 if method ==0
     StartIndZ=randsrc(n,1,1:m);
@@ -83,6 +82,7 @@ while(iter<Iter)
                 return;
             else
                 StartIndZ=laMM; 
+                A = meanInd(X, StartIndZ,m,BiGraph);
             end                   
         end
         [laKMM, laMM, BiGraph, isCov, obj, ~] = CSBG(X, c, A, k);   
