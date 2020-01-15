@@ -17,8 +17,8 @@ y2 = 2+zeros(n1,1);
 
 % nose 
 x3=zeros(n3,2);
-r=1.5
-t=(5/4*pi):pi/(2*n3-1):(7/4*pi); % �°�Բ
+r=1.5;
+t=(5/4*pi):pi/(2*n3-1):(7/4*pi); % ÏÂ°ëÔ²
 x3(:, 1) = r.*cos(t)'+randn(n3,1)*noise;
 x3(:, 2) = r.*sin(t)'+randn(n3,1)*noise;
 y3 = 3+zeros(n3,1);
