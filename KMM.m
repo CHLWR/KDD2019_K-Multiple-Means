@@ -1,5 +1,5 @@
 
-function [laKMM, laMM, BiGraph, A, OBJ, Ah, laKMMh] = KMM(X, c, m, k)
+function [laKMM, laMM, BiGraph, A, OBJ, Ah, laKMMh] = KMM_mmconv(X, c, m, k)
 % [laKMM, laMM, BiGraph, Anc, ~, ~, ~]= KMM(X', c, m,k) : K-Multiple-Means
 % Input:
 %       - X: the data matrix of size nFea x nSmp, where each column is a sample
@@ -12,6 +12,7 @@ function [laKMM, laMM, BiGraph, A, OBJ, Ah, laKMMh] = KMM(X, c, m, k)
 %       - laMM: the sub-cluster assignment for each point
 %       - BiGraph: the matrix of size nSmp x nMM
 %       - A: the multiple means matrix of size nFea x nMM
+%       - Ah: the history of multiple means
 %       - laKMMh: the history of cluster assignment for each point
 % Requre:
 %       CSBG.m
@@ -29,16 +30,11 @@ function [laKMM, laMM, BiGraph, A, OBJ, Ah, laKMMh] = KMM(X, c, m, k)
 %
 %	Feiping Nie, Cheng-Long Wang, Xuelong Li, "K-Multiple-Means: A Multiple-Means 
 %   Clustering Method with Specified K Clusters," In The 25th ACM SIGKDD Conference
-%   on Knowledge Discovery and Data Mining (KDD'19), August 4-8, 2019, Anchorage, AK, USA.
+%   on Knowledge Discovery and Data Mining (KDD ’19), August 4–8, 2019, Anchorage, AK, USA.
 %
 %   version 1.0 --May./2019 
 %
 %   Written by Cheng-Long Wang (ch.l.w.reason AT gmail.com)
-
-Ah=[];
-laKMMh=[];
-Iter=15;
-OBJ=0;
 if nargin < 4
     if m<6
         k=c-1;
@@ -46,86 +42,59 @@ if nargin < 4
         k=5;
     end      
 end
-
+Ah=[];
+laKMMh=[];
+Iter=15;
+OBJ=[];
 n=size(X,2);
-m0=m;
-Success=1;
-method=1;
+method=1; % method for initial seeds, 1:kmeans; 0:random 
+opt_conv=1; % option for convergence, 1:sub prototypes; 0:partiton of subclusters 
 % StartIndZ: before MM update
-% EndIndZ: after MM update
 if method ==0
-    idx=randsrc(m,1,1:n);
-    Dis=sqdist(X,X(:,idx));
-    [~, StartIndZ] = min(Dis, [], 2);
+    StartIndZ=randsrc(n,1,1:m);
 else
     StartIndZ=kmeans(X',m);
 end
 BiGraph = ones(n,m);
 A = meanInd(X, StartIndZ,m,BiGraph);
-
-Ah=[Ah A];
-tic
 [laKMM, laMM, BiGraph, isCov, obj, ~] = CSBG(X, c, A, k);
-laKMMh=[laKMMh laKMM];
-ti=toc;
-OBJ(1)=obj(end);
 % fprintf('time:%d,obj:%d\n',ti,obj)
 iter=1;
 while(iter<Iter)
     iter = iter +1;
     if isCov
-        fprintf('iter:%d\n',iter)
-        OBJ(iter)=obj(end);       
-%         [Z, ~, ~, id]= ConstructA_NP(X, Anc,k);
-%         MidIndZ=id(:,1);
-        if (all(StartIndZ==laMM))
-        % if OBJ(end)==OBJ(end-1) || (all(StartInd==EndInd) & all(StartIndZ==EndIndZ))
-%             Anc = meanInd(X, EndIndZ, c, Z);
-            fprintf('all mid=end \n')
-            return;
-        elseif(length(unique(laMM))~=m)
-            fprintf('length(unique(EndIndZ))~=m \n')
-            StartIndZ=laMM;
-            while(length(unique(StartIndZ))~=m)
-                fprintf('len mid ~=m \n')
-                A = A(:,unique(StartIndZ));
-                m = length(unique(StartIndZ));
-                if length(unique(StartIndZ))>c 
-                    [BiGraph, ~, ~, id]= ConstructA_NP(X, A,k);
-                    StartIndZ=id(:,1);                   
-                else % re-ini
-                    m=m0;
-                    StartIndZ=kmeans(X',m);
-                    BiGraph=ones(n,m);
-                    A = meanInd(X, StartIndZ, m, BiGraph);
-                    Success=0;
-                end
-            end
-            if Success==0
-                Ah=[];
-            end
-            Ah=[Ah A]; Success=1;               
-        else
-            fprintf('mid ~=end & len min=m \n')
-            StartIndZ=laMM;  
-            A = meanInd(X, StartIndZ, m, BiGraph);
-            Ah=[Ah A];
-        end
-    else
-        fprintf('0~=isCov\n')
-        StartIndZ=kmeans(X',m);
-        BiGraph=ones(n,m);
-        A = meanInd(X, StartIndZ, m, BiGraph);
-        Ah=[];
+        laKMMh=[laKMMh laKMM];
         Ah=[Ah A];
+        OBJ=[OBJ obj];
+        if opt_conv==1
+            StartIndZ=laMM; 
+            A_old = A;
+            A = meanInd(X, StartIndZ, m, BiGraph);
+            Dis = sqdist(A_old,A); % O(ndm)
+            distXt = Dis;
+            di = min(distXt, [], 2);  
+            if norm(di)<1e-4
+                fprintf('means converge\n')
+                return;
+            end
+        else            
+            if (all(StartIndZ==laMM))
+                fprintf('partition converge\n')
+                return;
+            else
+                StartIndZ=laMM; 
+            end                   
+        end
+        [laKMM, laMM, BiGraph, isCov, obj, ~] = CSBG(X, c, A, k);   
+    else
+        if method ==0
+            StartIndZ=randsrc(n,1,1:m);
+        else
+            StartIndZ=kmeans(X',m);
+        end
+        BiGraph = ones(n,m);
+        A = meanInd(X, StartIndZ,m,BiGraph);
+        [laKMM, laMM, BiGraph, isCov, obj, ~] = CSBG(X, c, A, k);
     end
-    
-    tic
-    [laKMM, laMM, BiGraph, isCov, obj, ~] = CSBG(X, c, A, k);
-    laKMMh=[laKMMh laKMM];
-    ti=toc;
-    % fprintf('time:%s,obj:%d\n',ti,obj)
-end
 fprintf('loop:%d\n',iter)
 end
-
