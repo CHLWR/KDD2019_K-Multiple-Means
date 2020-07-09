@@ -22,7 +22,7 @@ function [laKMM, laMM, BiGraph,isCov, OBJ, alpha, lambda] = CSBG(X, c, A, k, alp
 %
 %	Feiping Nie, Cheng-Long Wang, Xuelong Li, "K-Multiple-Means: A Multiple-Means 
 %   Clustering Method with Specified K Clusters," In The 25th ACM SIGKDD Conference
-%   on Knowledge Discovery and Data Mining (KDD ¡¯19), August 4¨C8, 2019, Anchorage, AK, USA.
+%   on Knowledge Discovery and Data Mining (KDD Â¡Â¯19), August 4Â¨C8, 2019, Anchorage, AK, USA.
 %
 %   version 1.0 --May./2019 
 %
@@ -52,7 +52,7 @@ Z0 = (Z+ZT')/2;
 
 
 if sum(evc(1:c)) > c*(1-zr)
-    error('The original graph has more than %d connected component£¬ Please set k larger', c);      
+    error('The original graph has more than %d connected componentÂ£Â¬ Please set k larger', c);      
 end;
 
 D1 = 1; D2 = 1;Ater = 0;
@@ -82,7 +82,7 @@ for iter = 1:NITER
     tmp2 = zeros(m,k);
     for i = 1:m
         dfiT = dist(idT(i,:),i);
-        ad = (dxiT(i,:)-0.5*lambda*dfiT')/(2*alphaT); 
+        ad = -(dxiT(i,:)+lambda*dfiT')/(2*alphaT);
         tmp2(i,:) = EProjSimplex_new(ad);
     end 
     ZT = sparse(repmat([1:m],1,k),idT(:),tmp2(:),m,n);  
