@@ -10,7 +10,7 @@ if nargin<3
     k = 5;
 end
 n = size(A,2);
-if isempty(B) || n==size(B,2)
+if isempty(B)
     B = A;
     m=n;
     if n>10000
