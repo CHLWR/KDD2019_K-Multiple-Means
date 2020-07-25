@@ -48,14 +48,14 @@ end
  end
 
 Z0 = (Z+ZT')/2;
-[BiGraph, U, V, evc] = svd2uv(Z0, c);
+[BiGraph, U, V, evc, D1, D2] = svd2uv(Z0, c);
 
 
 if sum(evc(1:c)) > c*(1-zr)
     error('The original graph has more than %d connected component£¬ Please set k larger', c);      
 end;
 
-D1 = 1; D2 = 1;Ater = 0;
+Ater = 0;
 dxi = zeros(n,k);
 % size(distX),size(id),size(dxi)
 for i = 1:n
