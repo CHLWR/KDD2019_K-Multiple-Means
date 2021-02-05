@@ -22,7 +22,7 @@ Run 'test_KMM_toy.m' in MATLAB. A example of updating process of multiple-means 
 ## Others
 KMM can not only obtain the clustering result but also obtain the prototypes corresponding to each sub-cluster, which can be applied to many fields such as vector quantization, cluster analysis, feature learning, nearest-neighbor search, data compression, etc. KMM can also be used as an anchor-based spectral clustering method, which can find better anchors and achieve better clustering result.
 
-**For large-scale clustering, if you have obtained anchors(and think they are good enough), you can also use CSBG(this is a one-iteration-version for KMM without updating anchors) to learn a structured bigraph which can give clustering results directly.**
+**For large-scale clustering, if you have obtained anchors(and think they are good enough), you can also use funs/CSBG.m(this is a one-iteration-version for KMM without updating anchors) to learn a structured bigraph which can give clustering results directly.**
 
 If you find this code useful in your research, please cite the paper.
 
