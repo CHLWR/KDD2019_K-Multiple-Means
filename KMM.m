@@ -12,10 +12,10 @@ function [laKMM, Z,Anchors,Sinit, obj] = KMM(X, c, m, k)
 %       - Anchors: the multiple means matrix of size nFea x nMM
 %       - Sinit: initial BiGraph
 % Requre:
-%     L2_distance_1.m
-% 		ConstructA_NP.m
-% 		EProjSimplex_new.m
-%     eig1.m
+%   L2_distance_1.m
+%   ConstructA_NP.m
+%   EProjSimplex_new.m
+%   eig1.m
 % Usage:
 %       % X: d*n
 %       [laKMM,BiGraph,Anchors]= KMM(X, c, m,k) ;
