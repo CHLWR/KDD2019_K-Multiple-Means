@@ -82,7 +82,7 @@ for iter = 1:NITER
     tmp2 = zeros(m,k);
     for i = 1:m
         dfiT = dist(idT(i,:),i);
-        ad = -(dxiT(i,:)+lambda*dfiT')/(2*alphaT);
+        ad =  (dxiT(i,:)-0.5*lambda*dfiT');        
         tmp2(i,:) = EProjSimplex_new(ad);
     end 
     ZT = sparse(repmat([1:m],1,k),idT(:),tmp2(:),m,n);  
