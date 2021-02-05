@@ -7,7 +7,7 @@ n=1000; [X, y] = face_gen(n, 0.1);c=4;
 m=floor(sqrt(n*c));k=5; fig = 1;       
 
 tic
-[laKMM,~,~,A,~,Ah,laKMMh ]= KMM(X', c, m,k) ;
+[laKMM,~,~,A,~,Ah,laKMMh ]= KMM_mmext(X', c, m,k) ;
 toc;
 result_KMM = ClusteringMeasure(y, laKMM);
 if ~fig
