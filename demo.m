@@ -1,5 +1,5 @@
 
-function [laKMM, laMM, BiGraph, A, OBJ, Ah, laKMMh] = KMM_mmconv(X, c, m, k)
+function [laKMM, laMM, BiGraph, A, OBJ, Ah, laKMMh] = demo(X, c, m, k)
 % [laKMM, laMM, BiGraph, Anc, ~, ~, ~]= KMM(X', c, m,k) : K-Multiple-Means
 % Input:
 %       - X: the data matrix of size nFea x nSmp, where each column is a sample
