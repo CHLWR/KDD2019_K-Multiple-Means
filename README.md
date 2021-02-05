@@ -17,28 +17,15 @@ data sets are conducted to show the effectiveness of the proposed algorithm.
 
 ## Short demo
 Run 'test_KMM_toy.m' in MATLAB. A example of updating process of multiple-means is as follows:
-
 <img src="https://github.com/CHLWR/KDD2019_K-Multiple-Means/blob/master/demo4.gif" align="center" width="400" height="400" />
-
-## Short Promotion Video
-Welcome to click 'thumbs-up' for our work.
-https://youtu.be/HswEYH2td8w
-
-[![IMAGE ALT TEXT](http://img.youtube.com/vi/HswEYH2td8w/0.jpg)](https://www.youtube.com/embed/HswEYH2td8w "K-Multiple-Means")
-
-## Oral Presentation Video
-which will be released soon.
 
 ## Others
 KMM can not only obtain the clustering result but also obtain the prototypes corresponding to each sub-cluster, which can be applied to many fields such as vector quantization, cluster analysis, feature learning, nearest-neighbor search, data compression, etc. KMM can also be used as an anchor-based spectral clustering method, which can find better anchors and achieve better clustering result.
+
+**For large-scale clustering, if you have obtained anchors(and think they are good enough), you can also use CSBG(this is a one-iteration-version for KMM without updating anchors) to learn a structured bigraph which can give clustering results directly.**
 
 If you find this code useful in your research, please cite the paper.
 
 ## Reference:
 
 Feiping Nie, Cheng-Long Wang, Xuelong Li, "K-Multiple-Means: A Multiple-Means Clustering Method with Specified K Clusters," in *Proceedings of the 25th ACM SIGKDD International Conference on Knowledge Discovery and Data Mining (KDD'19)*, Anchorage, AK, USA, August 4–8, 2019.
-
-----
-
-## Update Log
-Fixed a bug on random seeds generation! Oct-12th-2019
