@@ -214,7 +214,13 @@ for Rter=1:RITER
 %         fprintf('%0.5g,%0.5g,%0.5g,%0.5g,%0.5g\n', st(Rter), at(Rter), ft(Rter), ft2(Rter), obj(Rter) );
         for i=1:m
             sub_idx=find(label==i);
-            Anchors(:,i)=X(:,sub_idx)*A(sub_idx,i)/sum(A(sub_idx,i));
+            if length(sub_idx)==1
+                Anchors(:,i)=X(:,sub_idx);
+            elseif sum(A(sub_idx,i))==0
+                Anchors(:,i)=X(:,sub_idx)*ones(length(sub_idx),1)/length(sub_idx);
+            else
+                Anchors(:,i)=X(:,sub_idx)*A(sub_idx,i)/sum(A(sub_idx,i));
+            end  
         end
 
         [Aup, Gamma, distX, id]= ConstructA_NP(X, Anchors,k);
